@@ -26,10 +26,10 @@
           <input id="tab4" type="radio" name="tabs" v-model="activeTab" value="mrt" />
           <label for="tab4">MRT</label>
         </div>
-
+<!-- 
         <form>
           <div class="form-group">
-            <span class="p-4 fw-bold">Enter Your Location</span>
+            <span class="ps-4 fw-bold">Enter Your Location</span>
             <br>
             <input type="text" class="form-control ms-4" v-model="address" placeholder="E.g. Gardens By the Bay">
             <br>
@@ -39,7 +39,7 @@
             <input type="hidden" id="lat" name="lat" :value="lat" />
             <input type="hidden" id="lng" name="lng" :value="lng" />
           </div>
-        </form>
+        </form> -->
 
         <!-- Bicycle Information -->
         <div v-if="activeTab === 'bicycle'">
@@ -84,20 +84,10 @@
 
         <p id="display" class="lead text-center">{{ displayInfo }}</p>
       </div>
-      <div class="col-lg-6 col-md-12">
+      <div class="col-lg-8 col-md-12 map ps-5 mb-3">
         <!-- Use a container to limit the map width -->
-        <div class="map-container" id="map">
           <!-- Include your GoogleMap component here -->
-          <TransportGoogleMap
-            :mapConfig="mapConfig"
-            apiKey="AIzaSyAEdK4QmPR7xGkCxDcpoD1GLKBwBL-R0zQ"
-          >
-          <template slot-scope="{ google, map }">
-            {{ map }}
-            {{ google }}
-          </template>
-          </TransportGoogleMap>
-        </div>
+          <TransportGoogleMap />
       </div>
     </div>
   </div>
@@ -107,13 +97,14 @@
 
 <script>
 // import axios from "axios";
-// import TransportGoogleMap from "./TransportGoogleMap.vue";
+import TransportGoogleMap from "./TransportGoogleMap.vue";
 // import { mapSettings } from '@/constants/mapSettings';
 // //   import { Loader } from "@googlemaps/js-api-loader"
-// export default {
-//   components: {
-//     TransportGoogleMap,
-//   },
+export default {
+  components: {
+    TransportGoogleMap,
+  },
+};
 //   computed: {
 //     mapConfig () {
 //       return {
@@ -397,20 +388,14 @@
 
 <style scoped>
 
-.tp-map{
-  min-height: 100vh;
-  top: auto;
-  bottom: auto;
-}
-.map-container {
-  max-width: 100%; /* Adjust the width as needed */
-  height: 100vh; /* Adjust the height as needed */
-  overflow: hidden; /* Add scrollbars if the content overflows */
+.map{
+  left: 5%;
 }
 
 #tabs-container {
   color: black;
   margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 
@@ -427,6 +412,7 @@ label {
   display: inline-block;
   padding: 0 25px;
   font-weight: 600;
+  font-size: 20px;
   &:not(:first-of-type) {
     border-left: 2px solid #628a5c;
     @media screen and (max-width: 480px) {

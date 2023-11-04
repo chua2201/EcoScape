@@ -17,8 +17,7 @@ import TransportSlides from "../components/TransportSlides.vue";
 import Metric from "../components/Metric.vue";
 import Footer from "@/components/Footer.vue";
 import TransportMap from "../components/TransportMap.vue";
-// import GoogleMap from "../components/GoogleMap.vue";
-// import TpGoogleMap from "../components/TpGoogleMap.vue";
+
 
 export default {
   name: "Transport",
@@ -31,8 +30,6 @@ export default {
     Metric,
     Footer,
     TransportMap,
-    // GoogleMap,
-    // TpGoogleMap,
-  },
+},
 };
 </script>
