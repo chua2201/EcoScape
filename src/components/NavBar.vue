@@ -91,7 +91,19 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item" v-if="!userLoggedIn">
+              <li class="nav-item" v-if="isUserAuthenticated">
+                <router-link
+                  to="/"
+                  class="nav-link"
+                  :class="{
+                    'text-white': isHomepage || isLoginPage || isTransportPage,
+                  }"
+                  @click="signOut"
+                >
+                  Sign Out
+                </router-link>
+              </li>
+              <li class="nav-item" v-else>
                 <router-link
                   to="/login"
                   class="nav-link"
@@ -102,22 +114,6 @@
                   Login / Sign Up
                 </router-link>
               </li>
-              <li class="nav-item" v-else>
-                <div class="dropdown">
-                  <span
-                    class="dropdown-toggle"
-                    id="userDropdown"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Hello, {{ userName }}
-                  </span>
-                  <div class="dropdown-menu" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" @click="logout">Sign Out</a>
-                  </div>
-                </div>
-              </li>
             </ul>
           </div>
         </div>
@@ -127,22 +123,23 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+
 export default {
   data() {
     return {
-      isNavbarOpen: false,
+      isNavbarOpen: false, 
       backgroundTransparent: true,
+      isUserAuthenticated: false, 
     };
   },
+  created() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      this.isUserAuthenticated = user !== null; // Set isUserAuthenticated based on user's authentication status
+    });
+  },
   computed: {
-    userLoggedIn() {
-      // Check if the user is logged in (replace with your authentication state)
-      return this.$store.getters.isUserLoggedIn; // Replace with your authentication state
-    },
-    userName() {
-      // Get the user's name from the state
-      return this.$store.state.user.name; // Replace with your user data
-    },
     isHomepage() {
       return this.$route.path === "/";
     },
@@ -155,12 +152,20 @@ export default {
   },
   methods: {
     toggleNavbar() {
-      this.isNavbarOpen = !this.isNavbarOpen;
+      this.isNavbarOpen = !this.isNavbarOpen; 
       this.backgroundTransparent = !this.isNavbarOpen;
     },
-    logout() {
-      // Implement the logout functionality
-      this.$store.dispatch("logout"); // Replace with your logout action
+    signOut() {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          // User signed out successfully
+          this.isUserAuthenticated = false;
+          this.$router.push('/');
+        })
+        .catch((error) => {
+          console.error('Sign Out Error:', error);
+        });
     },
   },
 };
@@ -350,7 +355,7 @@ export default {
     color: white;
   }
 
-  .navbar-mobile .custom-fa{
+  .navbar-mobile .custom-fa::before{
     content: "\2630";
     color: #0d190b;
   }

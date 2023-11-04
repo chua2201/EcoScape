@@ -51,7 +51,7 @@
                               type="password"
                               name="Signpass"
                               class="form-style"
-                              placeholder="Your Password (8 characters)"
+                              placeholder="Your Password (>5 characters)"
                               id="Signpass"
                               autocomplete="off"
                               v-model="Signpass"
@@ -78,86 +78,85 @@
                           </div>
                           <div
                             class="error"
-                            v-if="!passwordValid && signUpButtonClicked"
+                            v-if="passwordValid && signUpButtonClicked"
                           >
                             Your password should be at least 6 characters long!
                           </div>
                           <div
-                            class="correct pt-1"
-                            v-if="isPasswordMatch && passwordValid && signupEmailIsValid && signUpButtonClicked"
-                            style="color: rgb(156, 229, 156);"
-                          >
-                            Sign Up Successful! You're signed in!
-                          </div>
-                          <a
-                            href="#"
-                            class="btn mt-4"
-                            id="signUp"
-                            @click="signUp"
-                            >Sign Up</a
-                          >
+                          class="correct pt-1"
+                          v-if="signupEmailIsValid && isPasswordMatch && signUpButtonClicked"
+                          style="color: rgb(156, 229, 156);"
+                        >
+                          Sign Up successful! You're signed in!
                         </div>
+                          <a
+                          href="#"
+                          class="btn mt-4"
+                          id="signUp"
+                          @click="signUp"
+                          >Sign Up</a
+                        >
                       </div>
                     </div>
-                    <div class="card-back">
-                      <div class="center-wrap">
-                        <div class="section text-center">
-                          <h4 class="mb-4 pb-3">Log In</h4>
+                  </div>
+                  <div class="card-back">
+                    <div class="center-wrap">
+                      <div class="section text-center">
+                        <h4 class="mb-4 pb-3">Log In</h4>
 
-                          <div class="form-group">
-                            <input
-                              type="text"
-                              name="logEmail"
-                              class="form-style"
-                              placeholder="Your Email (e.g james012@gmail.com)"
-                              id="logEmail"
-                              autocomplete="off"
-                              v-model="logEmail"
-                            />
-                            <i class="input-icon uil uil-user"></i>
-                          </div>
-
-                          <div
-                            v-if="!loginEmailIsValid && loginButtonClicked"
-                            class="error"
-                          >
-                            Please enter a valid email (e.g.,
-                            yourname@example.com)
-                          </div>
-                      
-                          <div class="form-group mt-2">
-                            <input
-                              type="password"
-                              name="logpass"
-                              class="form-style"
-                              placeholder="Your Password"
-                              id="logpass"
-                              autocomplete="off"
-                              v-model="logpass"
-                            />
-                            <i class="input-icon uil-lock-alt"></i>
-                          </div>
-                          <div
-                            v-if="!loginPassIsValid && loginButtonClicked"
-                            class="error"
-                          >
-                            Please enter a correct password
-                          </div>
-                          <div
-                            class="correct pt-1"
-                            v-if="loginPassIsValid && loginEmailIsValid && loginButtonClicked"
-                            style="color: rgb(156, 229, 156);"
-                          >
-                            Welcome Back! You're signed in!
-                          </div>
-                          <a
-                            href="#"
-                            class="btn mt-4"
-                            id="Login"
-                            @click="isLogin"
-                            >Log In</a
-                          >
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            name="logEmail"
+                            class="form-style"
+                            placeholder="Your Email (e.g james012@gmail.com)"
+                            id="logEmail"
+                            autocomplete="off"
+                            v-model="logEmail"
+                          />
+                          <i class="input-icon uil uil-user"></i>
                         </div>
+
+                        <div
+                          v-if="!loginEmailIsValid && loginButtonClicked"
+                          class="error"
+                        >
+                          Please enter a valid email (e.g.,
+                          yourname@example.com)
+                        </div>
+                    
+                        <div class="form-group mt-2">
+                          <input
+                            type="password"
+                            name="logpass"
+                            class="form-style"
+                            placeholder="Your Password"
+                            id="logpass"
+                            autocomplete="off"
+                            v-model="logpass"
+                          />
+                          <i class="input-icon uil-lock-alt"></i>
+                        </div>
+                        <div
+                          v-if="!loginPassIsValid && loginButtonClicked"
+                          class="error"
+                        >
+                          Please enter a correct password
+                        </div>
+                        <div
+                          class="correct pt-1"
+                          v-if="loginPassIsValid && loginEmailIsValid && loginButtonClicked"
+                          style="color: rgb(156, 229, 156);"
+                        >
+                          Welcome Back! You're signed in!
+                        </div>
+                        <a
+                          href="#"
+                          class="btn mt-4"
+                          id="Login"
+                          @click="isLogin"
+                          >Log In</a
+                        >
                       </div>
                     </div>
                   </div>
@@ -168,16 +167,17 @@
         </div>
       </div>
     </div>
-  </body>
-  <Footer />
+  </div>
+</body>
+<Footer />
 </template>
 
 <script>
 import { defineComponent, ref, computed } from "vue";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import NavBar from "@/components/NavBar.vue";
@@ -186,13 +186,13 @@ import Dashboard from "@/components/Dashboard.vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  components: {
-    NavBar,
-    Footer,
-    Dashboard,
-  },
-  setup() {
-    const email = ref("");
+components: {
+  NavBar,
+  Footer,
+  Dashboard,
+},
+setup() {
+  const email = ref("");
     const logpass = ref("");
     const error = ref(null);
     const logEmail = ref(""); // Define logEmail
@@ -203,11 +203,10 @@ export default defineComponent({
     const auth = getAuth(); // Access the Auth instance
     const signUpButtonClicked = ref(false);
     const loginButtonClicked = ref(false);
-    var toDisplay = "";
     const router = useRouter();
 
-    // Function to check if an email is valid
-    const isEmailValid = (emailValue) => {
+  // Function to check if an email is valid
+  const isEmailValid = (emailValue) => {
       return emailValue.includes("@");
     };
 
@@ -229,43 +228,48 @@ export default defineComponent({
       return Signpass.value === confirmPass.value;
     });
 
-    const isLogin = async () => {
-      error.value = null;
-      loginButtonClicked.value = true;
+  const isLogin = async () => {
+    error.value = null;
+    loginButtonClicked.value = true;
 
-      try {
-        await signInWithEmailAndPassword(auth, logEmail.value, logpass.value);
+    try {
+      await signInWithEmailAndPassword(auth, logEmail.value, logpass.value);
 
-        // Query Firestore for user data
-        const colRef = collection(db, "users");
-        const q = query(colRef, where("uid", "==", auth.currentUser.uid));
-        const querySnapshot = await getDocs(q);
+      // Query Firestore for user data
+      const colRef = db.collection(users);
+      const q = query(colRef, where("uid", "==", auth.currentUser.uid));
+      const querySnapshot = await getDocs(q);
 
-        if (querySnapshot.size > 0) {
-          // User data found
-          querySnapshot.forEach((doc) => {
-            const userData = doc.data();
-            // Use userData as needed
-          });
-        }
-
-        // Redirect to the dashboard
-        this.$router.replace("Dashboard");
-      } catch (e) {
-        error.value = e.message;
+      if (querySnapshot.size > 0) {
+        // User data found
+        querySnapshot.forEach((doc) => {
+          const userData = doc.data();
+          // Use userData as needed
+        });
       }
-    };
-    const createUserInFirestore = async (user) => {
-      const colRef = collection(db, "users");
-      const userDoc = {
-        uid: user.uid, // Use the Firebase Authentication UID
-        email: SignUpEmail.value,
-        password: Signpass.value,
-        // Other user-specific data
-      };
-      await addDoc(colRef, userDoc);
-    };
-    const signUp = async () => {
+
+      // Redirect to the dashboard
+      this.$router.replace("Dashboard");
+    } catch (e) {
+      error.value = e.message;
+    }
+  };
+  const createUserInFirestore = async (user) => {
+
+    // Add a new document with a generated id.
+  const docRef = await addDoc(collection(db, "users"), {
+    uid: user.uid, // Use the Firebase Authentication UID
+    email: SignUpEmail.value,
+    password: Signpass.value,
+  });
+// console.log("Document written with ID: ", docRef.id);
+// console.log("isPasswordMatch: ", isPasswordMatch);
+// console.log("passwordValid: ", passwordValid);
+// console.log("signupEmailIsValid: ", signupEmailIsValid);
+// console.log("signUpButtonClicked: ", signUpButtonClicked);
+
+  };
+  const signUp = async () => {
       error.value = null;
       signUpButtonClicked.value = true;
 
@@ -277,334 +281,332 @@ export default defineComponent({
         );
         const user = userCredential.user;
         await createUserInFirestore(user);
-        // Redirect to the homepage
-        toDisplay = "You are signed in!";
-      } catch (e) {
+      }catch (e) {
         error.value = e.message;
       }
     };
-
-    return {
-      // router,
-      email,
-      logpass,
-      error,
-      isLogin,
-      signUp,
-      isEmailValid,
-      isPasswordMatch,
-      logEmail,
-      SignUpEmail,
-      Signpass,
-      confirmPass,
-      loginButtonClicked,
-      signUpButtonClicked,
-      signupEmailIsValid,
-      loginEmailIsValid,
-      loginPassIsValid,
-      passwordValid,
-      toDisplay,
-    };
-  },
+  return {
+    // router,
+    email,
+    logpass,
+    error,
+    isLogin,
+    signUp,
+    isEmailValid,
+    createUserInFirestore,
+    createUserWithEmailAndPassword,
+    isPasswordMatch,
+    logEmail,
+    SignUpEmail,
+    Signpass,
+    confirmPass,
+    loginButtonClicked,
+    signUpButtonClicked,
+    signupEmailIsValid,
+    loginEmailIsValid,
+    loginPassIsValid,
+    passwordValid,
+    db
+  };
+},
 });
 </script>
 
 <style scoped>
-@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css");
 /* bootstrap, icons & fonts  */
 @import url("https://unicons.iconscout.com/release/v2.1.9/css/unicons.css");
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 
+
 body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(../../images/sg.jpg) no-repeat fixed;
-  /* opacity: 0.5;  */
-  background-size: cover;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #ddddda;
-  display: flex;
-  height: auto;
-  width: 100%;
-  padding: 0;
-  margin: 0;
+font-family: "Poppins", sans-serif;
+background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  url(../../images/sg.jpg) no-repeat fixed;
+/* opacity: 0.5;  */
+background-size: cover;
+font-weight: 300;
+font-size: 15px;
+line-height: 1.7;
+color: #ddddda;
+display: flex;
+height: auto;
+width: 100%;
+padding: 0;
+margin: 0;
 }
 
-.lead {
-  font-size: 12px;
-  font-weight: 7;
-  text-decoration: underline;
-}
 
 h1 span {
-  color: rgb(36, 140, 46);
+color: rgb(36, 140, 46);
 }
 
 .banner {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
+margin: 0;
+padding: 0;
+width: 100%;
+height: 100%;
+z-index: 2;
 }
 a {
-  cursor: pointer;
-  transition: all 200ms linear;
+cursor: pointer;
+transition: all 200ms linear;
 }
 
 a:hover {
-  text-decoration: none;
+text-decoration: none;
 }
 
 .link {
-  color: #c4c3ca;
+color: #c4c3ca;
 }
 
 .link:hover {
-  color: #ddead1;
+color: #ddead1;
 }
 
 p {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.7;
+font-weight: 500;
+font-size: 14px;
+line-height: 1.7;
 }
 
 h4 {
-  font-weight: 600;
-  font-size: 30px;
+font-weight: 600;
+font-size: 30px;
 }
 
 h6 span {
-  padding: 0 20px;
-  display: inline-block;
-  /* background-color: #2f4425 ; */
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 20px;
-  color: #ffffff;
-  margin: 5px;
+padding: 0 20px;
+display: inline-block;
+/* background-color: #2f4425 ; */
+text-transform: uppercase;
+font-weight: 700;
+font-size: 20px;
+color: #ffffff;
+margin: 5px;
 }
 .error {
+font-size: 12px;
+}
+
+.correct{
   font-size: 12px;
 }
 .section {
-  position: relative;
-  margin-top: 19px;
-  max-width: 100%;
-  display: block;
+position: relative;
+margin-top: 19px;
+max-width: 100%;
+display: block;
 }
 
 .full-height {
-  min-height: 100vh;
+min-height: 100vh;
 }
 
 [type="checkbox"] {
-  position: absolute;
-  appearance: none;
+position: absolute;
+appearance: none;
 }
 
 .checkbox:checked + label,
 .checkbox:not(:checked) + label {
-  position: relative;
-  display: block;
-  text-align: center;
-  width: 60px;
-  height: 16px;
-  background-color: #e4e9ea;
-  border-radius: 8px;
-  padding: 0;
-  margin: 10px auto;
-  cursor: pointer;
+position: relative;
+display: block;
+text-align: center;
+width: 60px;
+height: 16px;
+background-color: #e4e9ea;
+border-radius: 8px;
+padding: 0;
+margin: 10px auto;
+cursor: pointer;
 }
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before {
-  position: absolute;
-  display: block;
-  width: 36px;
-  height: 36px;
-  background-color: #055a72;
-  border-radius: 50%;
-  color: #ffffff;
-  font-family: "unicons";
-  content: "\eb4f";
-  z-index: 20;
-  top: -10px;
-  left: -10px;
-  line-height: 36px;
-  text-align: center;
-  font-size: 24px;
-  transition: all 0.5s ease;
+position: absolute;
+display: block;
+width: 36px;
+height: 36px;
+background-color: #055a72;
+border-radius: 50%;
+color: #ffffff;
+font-family: "unicons";
+content: "\eb4f";
+z-index: 20;
+top: -10px;
+left: -10px;
+line-height: 36px;
+text-align: center;
+font-size: 24px;
+transition: all 0.5s ease;
 }
 
 .checkbox:checked + label:before {
-  transform: translateX(44px) rotate(-270deg);
+transform: translateX(44px) rotate(-270deg);
 }
 
 .card-3d-wrap {
-  position: relative;
-  width: 440px;
-  max-width: 100%;
-  height: 400px;
-  transform-style: preserve-3d;
-  perspective: 800px;
-  margin-top: 60px;
+position: relative;
+width: 440px;
+max-width: 100%;
+height: 400px;
+transform-style: preserve-3d;
+perspective: 800px;
+margin-top: 60px;
 }
 
 .card-3d-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  gap: 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-style: preserve-3d;
-  transition: all 600ms ease-out;
+width: 100%;
+height: 100%;
+display: flex;
+gap: 10px;
+position: absolute;
+top: 0;
+left: 0;
+transform-style: preserve-3d;
+transition: all 600ms ease-out;
 }
 
 .card-front,
 .card-back {
-  width: 100%;
-  height: 100%;
-  background-color: #2f4425;
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  background-size: 300%;
-  border-radius: 6px;
-  left: 0;
-  top: 0;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+width: 100%;
+height: 100%;
+background-color: #2f4425;
+background-position: bottom center;
+background-repeat: no-repeat;
+background-size: 300%;
+border-radius: 6px;
+left: 0;
+top: 0;
+transform-style: preserve-3d;
+backface-visibility: hidden;
 }
 
 .center-wrap {
-  position: absolute;
-  width: 100%;
-  padding: 0 35px;
-  top: 50%;
-  left: 0;
-  transform: translate3d(0, -50%, 35px) perspective(100px);
-  z-index: 20;
-  display: block;
+position: absolute;
+width: 100%;
+padding: 0 35px;
+top: 50%;
+left: 0;
+transform: translate3d(0, -50%, 35px) perspective(100px);
+z-index: 20;
+display: block;
 }
 
 .form-group {
-  position: relative;
-  margin: 0;
-  padding: 0;
+position: relative;
+margin: 0;
+padding: 0;
 }
 
 .form-style {
-  color: #c4c3ca;
-  background-color: #1f2927;
-  padding: 13px 20px;
-  padding-left: 55px;
-  height: 48px;
-  width: 100%;
-  font-weight: 500;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: 0.5px;
-  outline: none;
-  border: none;
-  transition: all 200ms linear;
-  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+color: #c4c3ca;
+background-color: #1f2927;
+padding: 13px 20px;
+padding-left: 55px;
+height: 48px;
+width: 100%;
+font-weight: 500;
+border-radius: 4px;
+font-size: 14px;
+line-height: 22px;
+letter-spacing: 0.5px;
+outline: none;
+border: none;
+transition: all 200ms linear;
+box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
 }
 
 .form-style:focus {
-  border: none;
-  outline: none;
-  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
+border: none;
+outline: none;
+box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
 }
 
 .input-icon {
-  position: absolute;
-  top: 7px;
-  left: 13px;
-  height: 48px;
-  font-size: 24px;
-  line-height: 35px;
-  text-align: left;
-  align-items: center;
-  color: #ffffff;
-  transition: all 200ms linear;
+position: absolute;
+top: 7px;
+left: 13px;
+height: 48px;
+font-size: 24px;
+line-height: 35px;
+text-align: left;
+align-items: center;
+color: #ffffff;
+transition: all 200ms linear;
 }
 
 input:focus::-webkit-input-placeholder {
-  opacity: 0;
-  transition: all 200ms linear;
+opacity: 0;
+transition: all 200ms linear;
 }
 
 .btn {
-  background-color: #87ab69;
-  color: #ffffff;
-  border-radius: 4px;
-  height: 44px;
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  transition: all 200ms linear;
-  padding: 0 30px;
-  letter-spacing: 1px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: none;
-  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
+background-color: #87ab69;
+color: #ffffff;
+border-radius: 4px;
+height: 44px;
+font-size: 15px;
+font-weight: 600;
+text-transform: uppercase;
+transition: all 200ms linear;
+padding: 0 30px;
+letter-spacing: 1px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+border: none;
+box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
 }
 
+
 .btn:hover {
-  background-color: #4a707a;
-  color: #ffffff;
-  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
+background-color: #4a707a;
+color: #ffffff;
+box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
 .card-front,
 .card-back {
-  position: absolute;
+position: absolute;
 }
 
 .card-back {
-  transform: rotateY(180deg);
+transform: rotateY(180deg);
 }
 
 .checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
-  transform: rotateY(180deg);
+transform: rotateY(180deg);
 }
 
 i {
-  align-self: left;
+align-self: left;
 }
 
 @media screen and (min-width: 1001px) {
-  .try {
-    justify-content: center;
-  }
+.try {
+  justify-content: center;
+}
 }
 
 @media screen and (max-width: 1000px) {
-  .try {
-    justify-content: center;
-  }
+.try {
+  justify-content: center;
+}
 }
 
 @media screen and (max-width: 700px) {
-  .try {
-    justify-content: center;
-  }
+.try {
+  justify-content: center;
+}
 }
 
 @media screen and (max-width: 501px) {
-  .try {
-    justify-content: center;
-  }
-  
+.try {
+  justify-content: center;
+}
+
 }
 </style>
