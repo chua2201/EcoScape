@@ -4,7 +4,7 @@
         <NavBar/>
       <!--Header -->
         <br><br><br>
-        <InformationHotel :index="index"/>
+        <InformationHotel :index="parseInt(index)"/>
         <!-- <Info/> -->
         <!-- put the card component here -->
         <Waves/>

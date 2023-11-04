@@ -1,5 +1,5 @@
 <template>
-  <div id="content1" class="tab-content">
+  <div id="content1" class="tab-content"  v-if="selectedTab === 'all'">
     <div class="gallery">
       <Dest
         class="card"
@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div id="content2" class="tab-content">
+  <div id="content2" class="tab-content" v-if="selectedTab === 'central'">
     <div class="gallery">
       <Dest
         class="card"
@@ -26,7 +26,7 @@
     <p v-if="central_dest.length === 0">No green restaurants in the Central area.</p>
   </div>
 
-  <div id="content3" class="tab-content">
+  <div id="content3" class="tab-content" v-if="selectedTab === 'east'">
     <div class="gallery">
       <Dest
         class="card"
@@ -40,7 +40,7 @@
     <p v-if="east_dest.length === 0">No green restaurants in the East area.</p>
   </div>
 
-  <div id="content4" class="tab-content">
+  <div id="content4" class="tab-content" v-if="selectedTab === 'south'">
     <div class="gallery">
       <Dest
         class="card"
@@ -54,7 +54,7 @@
     <p v-if="south_dest.length === 0">No green restaurants in the South area.</p>
   </div>
 
-  <div id="content5" class="tab-content">
+  <div id="content5" class="tab-content" v-if="selectedTab === 'north'">
     <div class="gallery">
       <Dest
         class="card"
@@ -68,7 +68,7 @@
     <p v-if="north_dest.length === 0">No green restaurants in the North area.</p>
   </div>
 
-  <div id="content6" class="tab-content">
+  <div id="content6" class="tab-content" v-if="selectedTab === 'west'">
     <div class="gallery">
       <Dest
         class="card"
@@ -98,6 +98,7 @@ export default {
       west_dest: [],
     };
   },
+  props: ['selectedTab'],
   methods: {
   navigateToUrl(destinationIndex) {
     this.$router.push({ name: 'IndividualRest', params: { id: destinationIndex } });
@@ -142,87 +143,6 @@ export default {
     padding-top: 1rem;
   }
   
-  .card {
-    position: relative;
-    left: 1.5rem;
-    width: 190px;
-    height: 140px;
-    border-radius: 8px;
-    transition: 1000ms all;
-    transform-origin: center left;
-    box-shadow: 0 5px 13px rgba(0, 0, 0, 0.5);
-    outline: 1px solid #3c343d;
-    overflow: hidden;
-  }
-  
-  .card img {
-    height: 160px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-  
-  .card:hover {
-    cursor: pointer;
-    transform: scale(1.15);
-  }
-  
-  .card:hover figcaption {
-    font-size: 0.6rem;
-    position: absolute;
-    height: 180px;
-    width: 190px;
-    display: flex;
-    align-items: end;
-    background: 
-      linear-gradient(
-        to top, 
-        rgba(0, 0, 0, 0.9) 0%,
-        rgba(0, 0, 0, 0) 100%
-      );
-    color: white;
-    left: 0px;
-    bottom: 0px;
-    padding-left: 12px;
-    padding-bottom: 10px;
-  }
-  
-  .card:hover ~ .card {
-    font-weight: bold;
-    cursor: pointer;
-    transform: translateX(22px);
-  }
-
-  /* Add the provided CSS code below this line */
-
-  
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: system-ui;
-  }
-  
-  h2 {
-    font-size: 25px;
-    margin-left: 3rem;
-    padding: 1.5rem;
-    font-weight: 50px;
-  }
-  
-  #typewriter {
-    color: #628a5c;
-  }
-  
-  #cursor {
-    color: #21321F;
-    font-weight: bold;
-    animation: blink 1s linear infinite;
-  }
-  
   @keyframes blink {
     100% {
       opacity: 1;
@@ -231,59 +151,9 @@ export default {
       opacity: 0;
     }
   }
-  
-  :root {
-    --primary: #628a5c;
-    --text-color: white;
-    --white: white;
-    --text-gray: #FEFEFE;
-    --text-heading-gray: white;
-    --background: #EDF0F9;
-    --border: #fff;
-  }
-  
-  *, *::after, *::before {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
 
-  #header {
-    transition: all 0.5s;
-    z-index: 997;
-    transition: all 0.5s;
-    padding: 24px 0;
-    background: rgba(103, 176, 209, 0.8);
-  }
-  
-  #header.header-transparent {
-    background: transparent;
-  }
-  
-  #header.header-scrolled {
-    background: rgba(55, 142, 181, 0.9);
-    padding: 12px;
-  }
-  
-  #header .logo img {
-    padding: 0;
-    margin: 0;
-    max-height: 50px;
-  }
-  
-  @media (max-width: 768px) {
-    #header.header-scrolled {
-      padding: 15px 0;
-    }
-  }
-  
  /* tabs */
 
-  .tab-content 
-  {
-    display: none;
-    padding: 20px 0 0;
-  }
 
   input 
   {
@@ -321,62 +191,8 @@ export default {
   grid-template-columns: repeat(6, 1fr); /* Display 3 cards per row by default */
   gap: 20px; /* Adjust the gap between cards */
 }
-  /* .card
-  {
-    position:relative;
-    left:1.5rem;
-    width:190px;
-    height:140px;
-    border-radius:8px;
-    transition:1000ms all;
-    transform-origin: center left;
-    box-shadow: 0 5px 13px rgba(0, 0, 0, 0.5);
-    outline: 1px solid #3c343d;
-    overflow:hidden;
-  } */
-  .card {
-  border: 1px solid #ccc; /* Card border */
-  border-radius: 8px; /* Rounded corners */
-  padding: 0;
-  display: flex; /* Make the card a flex container */
-  flex-direction: column; /* Arrange card contents vertically */
-}
-  .card img {
-    height: 160px;
-    object-fit: cover;
-    border-radius: 4px;
-}
 
-.card:hover {
-    cursor: pointer;
-    transform: scale(1.15);
-}
 
-.card:hover figcaption {
-    font-size: 0.6rem;
-    position: absolute;
-    height: 180px;
-    width: 190px;
-    display: flex;
-    align-items: end;
-    background: 
-    linear-gradient(
-        to top, 
-        rgba(0, 0, 0, 0.9) 0%,
-        rgba(0, 0, 0, 0) 100%
-    );
-    color: white;
-    left: 0px;
-    bottom: 0px;
-    padding-left: 12px;
-    padding-bottom: 10px;
-}
-
-.card:hover ~ .card {
-    font-weight: bold;
-    cursor: pointer;
-    transform: translateX(22px);
-}
 @media (max-width: 1400px) {
   .gallery {
     grid-template-columns: repeat(4, 1fr); /* Display 2 cards per row for medium-sized screens */
@@ -403,3 +219,4 @@ export default {
   
 }
 </style>
+

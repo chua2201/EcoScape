@@ -11,19 +11,19 @@
           <div class="home__data">
             <h1 class="home__title">{{ name }}</h1>
             <!-- Edit name -->
-            <h3 class="home__subtitle" style="color: #41782b">
+            <h3 class="home__subtitle pt-2" style="color: #41782b;">
               Green Rating: {{ greenScore }}
             </h3>
-            <!-- Edit  green rating -->
-            <h3 class="home__subtitle" style="color: rgb(252, 177, 3)">
+            <!-- Edit green rating -->
+            <h3 class="home__subtitle pt-2" style="color: rgb(252, 177, 3);">
               Rating: {{ rating }}
             </h3>
             <!-- Edit rating  -->
-            <p class="home__description">
+            <p class="home__description pt-2">
               <!-- Edit description -->
               {{ description }}
             </p>
-            <a :href="url" class="button button-flex">
+            <a :href="url" class="button button-flex mt-3">
               <!-- Edit url-->
               Go To Their Website! <i class="uil uil-message button__icon"></i>
             </a>
@@ -90,10 +90,10 @@ export default {
     async fetchDestinationData() {
       try {
         const response = await axios.get("/destination.json"); // Path to the JSON file in the public folder
-        console.log(response.data);
-        console.log(this.index);
+        // console.log(response.data);
+        // console.log(this.index);
         const destination = response.data[this.index];
-        console.log(destination);
+        // console.log(destination);
         this.image = "../" + destination.image;
         this.url = destination.url;
         this.name = destination.name;
@@ -271,11 +271,11 @@ img {
 .home__data {
   grid-column: 1/3;
 }
-.home__title {
+/* .home__title {
   font-size: var(--big-font-size);
-}
+} */
 .home__subtitle {
-  font-size: var(--h3-font-size);
+  /* font-size: var(--h3-font-size); */
   color: var(--text-color);
   font-weight: var(--font-medium);
   margin-bottom: var(--mb-0-75);

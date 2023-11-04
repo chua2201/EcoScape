@@ -1,17 +1,4 @@
 <template>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EcoScape</title>
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous"
-    />
-  </head>
   <NavBar />
   <body>
     <div class="container-fluid p-0">
@@ -64,7 +51,7 @@
                               type="password"
                               name="Signpass"
                               class="form-style"
-                              placeholder="Your Password"
+                              placeholder="Your Password (8 characters)"
                               id="Signpass"
                               autocomplete="off"
                               v-model="Signpass"
@@ -94,6 +81,13 @@
                             v-if="!passwordValid && signUpButtonClicked"
                           >
                             Your password should be at least 6 characters long!
+                          </div>
+                          <div
+                            class="correct pt-1"
+                            v-if="isPasswordMatch && passwordValid && signupEmailIsValid && signUpButtonClicked"
+                            style="color: rgb(156, 229, 156);"
+                          >
+                            Sign Up Successful! You're signed in!
                           </div>
                           <a
                             href="#"
@@ -130,7 +124,7 @@
                             Please enter a valid email (e.g.,
                             yourname@example.com)
                           </div>
-
+                      
                           <div class="form-group mt-2">
                             <input
                               type="password"
@@ -143,7 +137,19 @@
                             />
                             <i class="input-icon uil-lock-alt"></i>
                           </div>
-
+                          <div
+                            v-if="!loginPassIsValid && loginButtonClicked"
+                            class="error"
+                          >
+                            Please enter a correct password
+                          </div>
+                          <div
+                            class="correct pt-1"
+                            v-if="loginPassIsValid && loginEmailIsValid && loginButtonClicked"
+                            style="color: rgb(156, 229, 156);"
+                          >
+                            Welcome Back! You're signed in!
+                          </div>
                           <a
                             href="#"
                             class="btn mt-4"
@@ -204,15 +210,19 @@ export default defineComponent({
     const isEmailValid = (emailValue) => {
       return emailValue.includes("@");
     };
+
+    const passwordValid = computed(() => {
+     return logpass.value.length >= 6;
+    });
+
+    const loginPassIsValid = computed(() => passwordValid.value);
+
     // Check if the email is valid for login
     const loginEmailIsValid = computed(() => isEmailValid(logEmail.value));
 
+
     // Check if the email is valid for signup
     const signupEmailIsValid = computed(() => isEmailValid(SignUpEmail.value));
-
-    const passwordValid = computed(() => {
-      return Signpass.value.length >= 6;
-    });
 
     const isPasswordMatch = computed(() => {
       // Validate if password matches the confirm password
@@ -275,6 +285,7 @@ export default defineComponent({
     };
 
     return {
+      // router,
       email,
       logpass,
       error,
@@ -290,6 +301,7 @@ export default defineComponent({
       signUpButtonClicked,
       signupEmailIsValid,
       loginEmailIsValid,
+      loginPassIsValid,
       passwordValid,
       toDisplay,
     };
@@ -593,12 +605,6 @@ i {
   .try {
     justify-content: center;
   }
-  #footer-separation {
-    background-color: #8ebe6d; /* Remove white space above and below */
-    border: none; /* Remove the default line */
-    height: 1px; /* Increase line thickness */
-    width: 80%; /* Adjust width as needed */
-    margin: 0 auto; /* Center the line horizontally */
-  }
+  
 }
 </style>

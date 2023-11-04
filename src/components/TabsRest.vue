@@ -3,25 +3,25 @@
   <div id="tab-container" class="tab-container">
     <div class="container-fluid">
       <div class="col-md-10 col-md-offset-1">
-        <input id="tab1" type="radio" name="tabs" checked />
+        <input id="tab1" type="radio" name="tabs" checked @click="selectTab('all')"/>
         <label for="tab1">All</label>
 
-        <input id="tab2" type="radio" name="tabs" />
+        <input id="tab2" type="radio" name="tabs" @click="selectTab('central')"/>
         <label for="tab2">Central</label>
 
-        <input id="tab3" type="radio" name="tabs" />
+        <input id="tab3" type="radio" name="tabs" @click="selectTab('east')"/>
         <label for="tab3">East</label>
 
-        <input id="tab4" type="radio" name="tabs" />
+        <input id="tab4" type="radio" name="tabs" @click="selectTab('south')"/>
         <label for="tab4">South</label>
 
-        <input id="tab5" type="radio" name="tabs" />
+        <input id="tab5" type="radio" name="tabs" @click="selectTab('north')"/>
         <label for="tab5">North</label>
 
-        <input id="tab6" type="radio" name="tabs" />
+        <input id="tab6" type="radio" name="tabs" @click="selectTab('west')"/>
         <label for="tab6">West</label>
 
-        <CardsRest />
+        <CardsRest :selectedTab="selectedTab"/>
       </div>
     </div>
   </div>
@@ -29,6 +29,17 @@
 <script>
 import CardsRest from "@/components/CardsRest.vue";
 export default {
+  data() {
+    return {
+      selectedTab: 'all', // Initialize with 'all' as the default tab
+    };
+  },
+  methods: {
+    // Handle tab selection and update selectedTab
+    selectTab(tab) {
+      this.selectedTab = tab;
+    },
+  },
   components: {
     CardsRest,
   },

@@ -4,7 +4,7 @@
         <NavBar/>
       <!--Header -->
         <br><br><br>
-        <Information :index="index"/>
+        <Information :index="parseInt(index)"/>
         <!-- <Info/> -->
         <!-- put the card component here -->
         <Waves/>
