@@ -27,7 +27,8 @@ import Tabs from "@/components/Tabs.vue";
 import TabsHotel from "@/components/TabsHotel.vue";
 import TabsRest from "@/components/TabsRest.vue";
 import TransportMap from "@/components/TransportMap.vue";
-import TransportGoogleMap from "@/components/TransportGoogleMap.vue";
+import BusStops from "./components/BusStops.vue";
+import Mrt from "./components/Mrt.vue";
 import "aos/dist/aos.css"; // Import the AOS styles
 import AOS from "aos";
 
@@ -54,7 +55,8 @@ export default {
     TabsHotel,
     TabsRest,
     TransportMap,
-    TransportGoogleMap,
+    BusStops,
+    Mrt,
   },
   mounted() {
     AOS.init(); // Initialize AOS

@@ -47,13 +47,13 @@
 
       <div v-if="activeTab === 'bicycle'">
         <div class="col-12">
-          <iframe src="https://www.google.com/maps/d/embed?mid=1glqXMZpL-qC-n473PaPzV8kV1E0&hl=en_US&ehbc=2E312F" style="width: 100%; height: 85vh;"></iframe>
+          <iframe src="https://www.google.com/maps/d/embed?mid=1glqXMZpL-qC-n473PaPzV8kV1E0&hl=en_US&ehbc=2E312F" style="width: 100%; height: 75vh; margin-bottom: 10px;"></iframe>
         </div>
       </div>
 
       <div v-if="activeTab === 'ev'">
         <div class="col-12">
-          <iframe src='https://www.plugshare.com/widget2.html?latitude=1.352083&longitude=103.819836&spanLat=0.17348&spanLng=0.17348&plugs=1,2,3,4,5,6,42,13,7,8,9,10,11,12,14,15,16,17' allow='geolocation' style="width: 100%; height: 85vh;"></iframe> 
+          <iframe src='https://www.plugshare.com/widget2.html?latitude=1.352083&longitude=103.819836&spanLat=0.17348&spanLng=0.17348&plugs=1,2,3,4,5,6,42,13,7,8,9,10,11,12,14,15,16,17' allow='geolocation' style="width: 100%; height: 75vh; margin-bottom: 10px;"></iframe> 
         </div>
       </div>
 

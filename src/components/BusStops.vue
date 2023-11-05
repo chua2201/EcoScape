@@ -12,7 +12,7 @@
       :center="center"
       :zoom="15"
       map-type-id="roadmap"
-      style="width: 100%; height: 700px"
+      style="width: 100%; height: 75vh; margin-bottom: 10px;"
     >
       <!-- Add a marker -->
       <GMapMarker v-for="busStop in busStops.value" :key="busStop.BusStopCode"
