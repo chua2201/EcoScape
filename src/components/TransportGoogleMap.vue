@@ -25,7 +25,7 @@
       :center="coords"
       :zoom="15"
       map-type-id="terrain"
-      style="width: 100%; height: 100vh"
+      style="width: 100%; height: 85vh"
       @load="onMapLoad"
     >
       <!-- Marker to display the searched location -->

@@ -21,6 +21,7 @@
             :autoplay="2500"
           >
             <Slide v-for="image in images" :key="image.src">
+              <router-link :to='image.route'>
               <div class="carousel__item">
                 <img class="caroImg" :src="image.src" alt="" />
                 <div class="caption">
@@ -28,6 +29,7 @@
                   <p>{{ image.caption.description }}</p>
                 </div>
               </div>
+            </router-link>
             </Slide>
           </Carousel>
         </div>
@@ -48,18 +50,22 @@ export default defineComponent({
         {
           src: "/images/parkroyal.jpg",
           caption: { title: "Eco-Friendly Retreat", description: "Discover a sustainable paradise that goes beyond luxury." },
+          route: '/hotels',
         },
         {
           src: "/images/jewel.jpg",
           caption: { title: "Nature's Playground", description: "Discover thrilling adventures while preserving our planet." },
+          route: '/att',
         },
         {
           src: "/images/restaurant.jpg",
           caption: { title: "Gastronomic Greenery", description: "Savor delectable dishes crafted with sustainability in mind." },
+          route: '/restaurants',
         },
         {
           src: "/images/electric_bus.jpg",
           caption: { title: "Ride the Future", description: "Efficient and eco-friendly transport solutions for cleaner cities." },
+          route: '/transport',
         },
       ],
     };

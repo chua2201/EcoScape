@@ -5,6 +5,7 @@
         <div class="col-lg-1 col-md-1 mb-2 mb-lg-0"></div>
 
         <div class="col-lg-4 col-md-4 mb-2 mb-lg-0">
+          <router-link to="/" class="text-decoration-none">
           <div class="d-flex align-items-center">
             <img
               src="images/icon-lightgreen.png"
@@ -13,6 +14,7 @@
             />
             <h2 class="footer-main-title mt-2 ps-3 pt-2">EcoScape</h2>
           </div>
+        </router-link>
         </div>
 
         <div class="footer-columns col-lg-2 col-md-2 mb-4 mb-lg-0">
