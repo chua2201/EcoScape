@@ -6,13 +6,28 @@
         placeholder="Search for a location"
         @place_changed="setPlace"
         v-model="searchInput"
-        style="font-size: medium"
+        style="font-size: medium; width: 60%"
       ></GMapAutocomplete>
+      <!-- <div class="btn">
+        <button
+          type="button"
+          class="btn btn-outline-dark btn-sm"
+          id="search"
+          @click="searchLocation"
+        >
+          Search
+        </button>
+      </div> -->
     </div>
 
     <!-- Rendering the map on the page -->
-    <GMapMap :center="coords" :zoom="10" map-type-id="terrain" style="width: 100%; height: 100vh;">
-
+    <GMapMap
+      :center="coords"
+      :zoom="15"
+      map-type-id="terrain"
+      style="width: 100%; height: 100vh"
+      @load="onMapLoad"
+    >
       <!-- Marker to display the searched location -->
       <GMapMarker
         :key="markerDetails.id"
@@ -31,17 +46,20 @@
         :options="{
           pixelOffset: {
             width: 10,
-            height: 10
+            height: 10,
           },
           maxWidth: 320,
-          maxHeight: 320
+          maxHeight: 320,
         }"
       >
         <div class="location-details">
           <h3>Location Details</h3>
           <p>Address: {{ locationDetails.address }}</p>
           <p>
-            URL: <a :href="locationDetails.url" target="_blank">{{ locationDetails.url }}</a>
+            URL:
+            <a :href="locationDetails.url" target="_blank">{{
+              locationDetails.url
+            }}</a>
           </p>
         </div>
       </GMapInfoWindow>
@@ -70,6 +88,8 @@ export default {
       url: ''
     });
 
+    const map = ref(null); 
+
     // Get user's current location using the browser's geolocation API
     const getUserLocation = () => {
       if ('geolocation' in navigator) {
@@ -81,7 +101,7 @@ export default {
     };
 
     // Set the location based on the place selected
-    const setPlace = (searchInput) => {
+    const setPlace = (place) => {
       coords.value.lat = place.geometry.location.lat();
       coords.value.lng = place.geometry.location.lng();
 
@@ -95,6 +115,40 @@ export default {
       openedMarkerID.value = id;
     };
 
+    // Callback function to store the map reference when the map is loaded
+    const onMapLoad = (mapInst) => {
+      map.value = mapInst;
+    };
+
+    // Search for the user's input location
+    const searchLocation = () => {
+      if (map.value) {
+        // Perform a search based on the user's input in searchInput
+        // You can use the Google Places API or a similar service to perform the search
+
+        // For this example, I'll assume you're using the Google Maps Places API
+        const service = new google.maps.places.PlacesService(map.value);
+        service.textSearch({ query: searchInput.value }, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+            const place = results[0];
+
+            // Update the map, marker, and location details
+            coords.value.lat = place.geometry.location.lat();
+            coords.value.lng = place.geometry.location.lng();
+            locationDetails.value.address = place.formatted_address;
+            locationDetails.value.url = place.url;
+
+            // Open the marker info window
+            openedMarkerID.value = markerDetails.id;
+          } else {
+            console.error('Place not found or an error occurred.');
+          }
+        });
+       } else {
+        console.error('Map is not defined.');
+      }
+
+};
     onMounted(() => {
       getUserLocation();
     });
@@ -107,8 +161,10 @@ export default {
       getUserLocation,
       setPlace,
       locationDetails,
-      searchInput
-    };
+      searchInput,
+      searchLocation,
+      onMapLoad
+    }
   }
 };
 </script>

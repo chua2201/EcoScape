@@ -232,6 +232,14 @@ img {
 
 /* HOME */
 
+#home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
 .about__img {
   border-radius: 5%;
 }
@@ -259,11 +267,11 @@ img {
 .home__data {
   grid-column: 1/3;
 }
-.home__title {
+/* .home__title {
   font-size: var(--big-font-size);
-}
+} */
 .home__subtitle {
-  font-size: var(--h3-font-size);
+  /* font-size: var(--h3-font-size); */
   color: var(--text-color);
   font-weight: var(--font-medium);
   margin-bottom: var(--mb-0-75);
@@ -312,5 +320,13 @@ img {
 .button--flex {
   display: inline-flex;
   align-items: center;
+}
+#services {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
 }
 </style>
