@@ -1,6 +1,9 @@
 # Ecoscape
 
-This template should help get you started developing with Vue 3 in Vite.
+SG Adventures with a Green Twist: Explore, Enjoy, and Eco-Discover!
+
+Find us live at 
+
 
 ## Recommended IDE Setup
 
