@@ -2,7 +2,7 @@
 
 SG Adventures with a Green Twist: Explore, Enjoy, and Eco-Discover!
 
-Find us live at 
+Find us live at https://ecoscape-ea1d6.web.app/
 
 
 ## Recommended IDE Setup
