@@ -89,7 +89,7 @@ export default {
   methods: {
     async fetchDestinationData() {
       try {
-        const response = await axios.get("/restaurant.json"); // Path to the JSON file in the public folder
+        const response = await axios.get("/hotel.json"); // Path to the JSON file in the public folder
         const destination = response.data[this.index];
         this.image = "../" + destination.image;
         this.url = destination.url;

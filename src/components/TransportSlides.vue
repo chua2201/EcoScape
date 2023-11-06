@@ -438,8 +438,6 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
   position: absolute;
   bottom: 40px;
   left: 50%;
