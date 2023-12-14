@@ -1,14 +1,14 @@
 {
   "functions": {
-    "source": "functions"
+    "source": ""
   },
   "hosting": {
-    "public": "views",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "public": "",
+    "ignore": ["", "", ""],
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/Login.vue"
+        "source": "",
+        "destination": ""
       }
     ]
   }
